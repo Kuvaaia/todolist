@@ -6,9 +6,12 @@ const filterActive = document.getElementById("filter-active");
 const filterCompleted = document.getElementById("filter-completed");
 const taskCounter = document.getElementById("task-counter");
 
-// charger au démarrage
+// Charger au démarrage
 loadTasks();
+setActiveButton(filterAll);
+button.disabled = true;
 
+// Ajouter une tâche au clic
 button.addEventListener("click", function () {
     const taskText = input.value.trim();
 
@@ -19,6 +22,20 @@ button.addEventListener("click", function () {
     updateTaskCounter();
 
     input.value = "";
+    input.focus();
+    button.disabled = true;
+});
+
+// Ajouter une tâche avec Entrée
+input.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" && input.value.trim() !== "") {
+        button.click();
+    }
+});
+
+// Activer / désactiver le bouton selon l'input
+input.addEventListener("input", function () {
+    button.disabled = input.value.trim() === "";
 });
 
 // -------- FONCTIONS --------
@@ -41,15 +58,17 @@ function addTask(text, completed = false) {
     const undoButton = document.createElement("button");
     undoButton.textContent = "Annuler";
     undoButton.classList.add("undo-btn");
-    undoButton.style.display = completed ? "inline-block" : "none";
-
-    if (completed) {
-        completeButton.style.display = "none";
-    }
 
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Supprimer";
     deleteButton.classList.add("delete-btn");
+
+    if (completed) {
+        completeButton.style.display = "none";
+        undoButton.style.display = "inline-block";
+    } else {
+        undoButton.style.display = "none";
+    }
 
     completeButton.addEventListener("click", function () {
         span.classList.add("completed");
@@ -68,9 +87,15 @@ function addTask(text, completed = false) {
     });
 
     deleteButton.addEventListener("click", function () {
-        li.remove();
-        saveTasks();
-        updateTaskCounter();
+        li.style.opacity = "0";
+        li.style.transform = "translateX(10px)";
+        li.style.transition = "0.2s ease";
+
+        setTimeout(() => {
+            li.remove();
+            saveTasks();
+            updateTaskCounter();
+        }, 200);
     });
 
     li.appendChild(span);
@@ -101,6 +126,7 @@ function loadTasks() {
     savedTasks.forEach(task => {
         addTask(task.text, task.completed);
     });
+
     updateTaskCounter();
 }
 
