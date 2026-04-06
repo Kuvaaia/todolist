@@ -5,6 +5,7 @@ const filterAll = document.getElementById("filter-all");
 const filterActive = document.getElementById("filter-active");
 const filterCompleted = document.getElementById("filter-completed");
 const taskCounter = document.getElementById("task-counter");
+const clearBtn = document.getElementById("clear-btn");
 
 // Charger au démarrage
 loadTasks();
@@ -36,6 +37,16 @@ input.addEventListener("keydown", function (e) {
 // Activer / désactiver le bouton selon l'input
 input.addEventListener("input", function () {
     button.disabled = input.value.trim() === "";
+});
+
+// Supprimer toutes les tâches
+clearBtn.addEventListener("click", function () {
+   if (confirm("Supprimer toutes les tâches ?")) { 
+    localStorage.removeItem("tasks");
+    list.innerHTML = "";
+    updateTaskCounter();
+    updateEmptyState();
+   } 
 });
 
 // -------- FONCTIONS --------
@@ -156,6 +167,13 @@ function updateEmptyState() {
     if (list.children.length === 0) {
         list.innerHTML = "<p class='empty'>Aucune tâche pour le moment</p>";
     }
+}
+
+function clearAllTasks() {
+    localStorage.removeItem("tasks");
+    list.innerHTML = "";
+    updateTaskCounter();
+    updateEmptyState();
 }
 
 function filterTasks(filter) {
