@@ -264,18 +264,48 @@ h1 {
 @media (max-width: 600px) {
     
     h1 {
-        font-size: 1.6 rem;
+        font-size: 1.9 rem;
+        line-height: 1.1;
+        margin-bottom: 20px;
     }   
     
     
     button {
         min-height: 44px;
     }
+
+    .portfolio-link {
+        position: static;
+        display: block;
+        margin-bottom: 12px;
+        font-size: 0.95 rem;
+    }
+
+    .task-header {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
     
+    #clear-btn {
+        padding: 0;
+    }    
+
+
     .todo-container {
         margin: 24px auto;
         padding: 20px 16px;
         border-radius: 12px;
+    }
+
+    .filters {
+        justify-content: flex-start;
+        gap:12px;
+    }
+
+    .filters button {
+        flex: 0 0 auto;
     }
 
     .todo-input {
