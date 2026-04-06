@@ -284,6 +284,7 @@ h1 {
     #task-input,
     #add-task-btn {
         width: 100%;
+        margin: auto;
     }
 
     .task-item {
