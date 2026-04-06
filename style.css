@@ -54,6 +54,13 @@ body {
   color: #000;
 }
 
+.empty {
+  text-align: center;
+  color: #888;
+  font-size: 0.95rem;
+  padding: 20px 0;
+}
+
 h1 {
     margin: 0 0 28px;
     font-size: 2rem;
@@ -235,15 +242,26 @@ h1 {
 }
 
 @media (max-width: 600px) {
+    
+    h1 {
+        font-size: 1.6 rem;
+    }   
+    
+    
+    button {
+        min-height: 44px;
+    }
+    
     .todo-container {
-        margin: 40px auto;
-        padding: 24px 18px;
+        margin: 24px auto;
+        padding: 20px 16px;
+        border-radius: 12px;
     }
 
     .todo-input {
         flex-direction: column;
     }
-
+    #task-input,
     #add-task-btn {
         width: 100%;
     }
@@ -252,10 +270,19 @@ h1 {
         flex-wrap: wrap;
         align-items: flex-start;
     }
+    
+    .task-item span {
+    width: 100%;
+    margin-bottom: 10px;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    }
+    
 
     .complete-btn,
     .undo-btn,
     .delete-btn {
         width: 100%;
+        flex: 1 1 100%;
     }
 }

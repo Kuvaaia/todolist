@@ -41,6 +41,10 @@ input.addEventListener("input", function () {
 // -------- FONCTIONS --------
 
 function addTask(text, completed = false) {
+    if (list.querySelector(".empty")) {
+    list.innerHTML = "";
+    }
+    
     const li = document.createElement("li");
     li.classList.add("task-item");
 
@@ -95,6 +99,7 @@ function addTask(text, completed = false) {
             li.remove();
             saveTasks();
             updateTaskCounter();
+            updateEmptyState();
         }, 200);
     });
 
@@ -128,6 +133,7 @@ function loadTasks() {
     });
 
     updateTaskCounter();
+    updateEmptyState();
 }
 
 function setActiveButton(activeBtn) {
@@ -144,6 +150,12 @@ function updateTaskCounter() {
     const activeTasks = tasks.length - completedTasks;
 
     taskCounter.textContent = `${activeTasks} à faire · ${completedTasks} terminée(s)`;
+}
+
+function updateEmptyState() {
+    if (list.children.length === 0) {
+        list.innerHTML = "<p class='empty'>Aucune tâche pour le moment</p>";
+    }
 }
 
 function filterTasks(filter) {
