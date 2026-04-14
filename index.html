@@ -1,38 +1,86 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do App</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-</head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>To-Do App</title>
+  <link rel="stylesheet" href="style.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
 </head>
 <body>
-    
-    <div class="todo-container">
-        <a href="https://kuvaaia.github.io/portfolio/" class="portfolio-link">Portfolio</a>
-        <h1>Ma To-Do List</h1>
-
-        <div class="todo-input">
-            <input type="text" id="task-input" placeholder="Ajouter une tâche">
-            <button id="add-task-btn">Ajouter</button>
-        </div>
-
-        <div class="filters">
-            <button id="filter-all">Toutes</button>
-            <button id="filter-active">À faire</button>
-            <button id="filter-completed">Terminées</button>
-        </div>
-
-        <div class="task-header">
-            <p id="task-counter">0 à faire · 0 terminée</p>
-            <button id="clear-btn">Tout supprimer</button>
-        </div>
-
-        <ul id="task-list"></ul>
+  <div class="todo-container">
+    <div class="top-bar">
+      <a href="https://kuvaaia.github.io/portfolio/" class="portfolio-link">Portfolio</a>
+      <button id="theme-toggle" type="button" class="theme-toggle" aria-label="Changer le thème">
+        🌙 Mode sombre
+      </button>
     </div>
 
-    <script src="script.js"></script>
+    <h1>Ma To-Do List</h1>
+
+    <form id="task-form" class="todo-input">
+      <input
+        type="text"
+        id="task-input"
+        placeholder="Ajouter une tâche"
+        maxlength="120"
+        autocomplete="off"
+      />
+
+      <select id="task-priority" aria-label="Priorité">
+        <option value="low">Faible</option>
+        <option value="medium" selected>Moyenne</option>
+        <option value="high">Haute</option>
+      </select>
+
+      <input type="date" id="task-date" aria-label="Date de la tâche" />
+
+      <button id="add-task-btn" type="submit">Ajouter</button>
+    </form>
+
+    <div class="toolbar">
+      <div class="filters">
+        <button type="button" class="filter-btn active" data-filter="all">Toutes</button>
+        <button type="button" class="filter-btn" data-filter="active">À faire</button>
+        <button type="button" class="filter-btn" data-filter="completed">Terminées</button>
+        <button type="button" class="filter-btn" data-filter="today">Aujourd’hui</button>
+        <button type="button" class="filter-btn" data-filter="high">Priorité haute</button>
+      </div>
+
+      <div class="sort-box">
+        <label for="sort-select">Trier par</label>
+        <select id="sort-select">
+          <option value="custom">Ordre manuel</option>
+          <option value="newest">Plus récentes</option>
+          <option value="oldest">Plus anciennes</option>
+          <option value="priority">Priorité</option>
+          <option value="dateAsc">Date proche</option>
+          <option value="dateDesc">Date lointaine</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="task-header">
+      <p id="task-counter">0 à faire · 0 terminée</p>
+
+      <div class="task-actions">
+        <button id="clear-completed-btn" type="button" class="link-btn">
+          Supprimer les terminées
+        </button>
+        <button id="clear-btn" type="button" class="link-btn danger">
+          Tout supprimer
+        </button>
+      </div>
+    </div>
+
+    <p class="drag-hint">Tu peux glisser-déposer les tâches en mode “Ordre manuel”.</p>
+
+    <ul id="task-list" aria-live="polite"></ul>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
